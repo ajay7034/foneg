@@ -3,6 +3,7 @@ document.addEventListener("DOMContentLoaded", () => {
   const menuToggle = document.querySelector(".menu-toggle");
   const headerNav = document.querySelector(".header-nav");
   const navLinks = document.querySelectorAll(".header-nav a");
+  const heroSlides = Array.from(document.querySelectorAll(".hero-slide"));
   const parallaxTargets = Array.from(document.querySelectorAll(".background"));
   const revealTargets = [
     ...document.querySelectorAll("section"),
@@ -52,6 +53,16 @@ document.addEventListener("DOMContentLoaded", () => {
         closeMenu();
       }
     });
+  }
+
+  if (heroSlides.length > 1) {
+    let currentHeroSlide = 0;
+
+    window.setInterval(() => {
+      heroSlides[currentHeroSlide].classList.remove("is-active");
+      currentHeroSlide = (currentHeroSlide + 1) % heroSlides.length;
+      heroSlides[currentHeroSlide].classList.add("is-active");
+    }, 4500);
   }
 
   requestAnimationFrame(() => {

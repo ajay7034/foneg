@@ -331,6 +331,22 @@ header a {
   top: -13%;
 }
 
+.hero-slider {
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+}
+
+.hero-slide {
+  opacity: 0;
+  -webkit-transition: opacity 1.1s ease;
+  transition: opacity 1.1s ease;
+}
+
+.hero-slide.is-active {
+  opacity: 1;
+}
+
 .section2 {
   height: 950px;
   position: relative;
@@ -340,8 +356,37 @@ header a {
   --pointer-y: 0px;
 }
 
-.section2 .background {
+.section2 > .background,
+.section2 .about-slide {
   top: -13%;
+}
+
+.about-slider {
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  overflow: hidden;
+}
+
+.about-slider__track {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  width: 400%;
+  height: 100%;
+  -webkit-animation: aboutCarousel 16s cubic-bezier(0.65, 0, 0.35, 1) infinite;
+          animation: aboutCarousel 16s cubic-bezier(0.65, 0, 0.35, 1) infinite;
+}
+
+.about-slide {
+  -webkit-box-flex: 0;
+      -ms-flex: 0 0 25%;
+          flex: 0 0 25%;
+  height: 100%;
+  background-color: #ffffff;
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
 }
 
 .section3 {
@@ -497,7 +542,80 @@ header a {
   -webkit-transition: -webkit-transform 0.3s ease;
   transition: -webkit-transform 0.3s ease;
   transition: transform 0.3s ease;
-  transition: transform 0.3s ease, -webkit-transform 0.3s ease;
+          transition: transform 0.3s ease, -webkit-transform 0.3s ease;
+}
+
+.section4__item--products {
+  -webkit-box-pack: start;
+      -ms-flex-pack: start;
+          justify-content: flex-start;
+  -webkit-box-align: start;
+      -ms-flex-align: start;
+          align-items: flex-start;
+}
+
+.section4__item--products .top__title {
+  width: 100%;
+  margin-top: 0;
+  padding: 28px 28px 0;
+  text-align: left;
+  z-index: 4;
+}
+
+.section4__item--products .homePod {
+  position: static;
+  left: auto;
+  bottom: auto;
+  -webkit-transform: none;
+          transform: none;
+}
+
+.section4__item--products .top__title--links {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  gap: 18px;
+  -ms-flex-wrap: wrap;
+      flex-wrap: wrap;
+}
+
+.section4__item--products .top__title--links a:nth-child(2) {
+  margin-left: 0;
+}
+
+.section4__item--products .product-cta {
+  display: -webkit-inline-box;
+  display: -ms-inline-flexbox;
+  display: inline-flex;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  margin-top: 18px;
+  padding: 11px 20px;
+  border-radius: 999px;
+  background: #111111;
+  color: #ffffff;
+  font-size: 15px;
+  font-weight: 500;
+  letter-spacing: 0.01em;
+  -webkit-box-shadow: 0 10px 22px rgba(17, 17, 17, 0.16);
+          box-shadow: 0 10px 22px rgba(17, 17, 17, 0.16);
+  -webkit-transition: background 0.3s ease, -webkit-transform 0.3s ease, -webkit-box-shadow 0.3s ease;
+  transition: background 0.3s ease, -webkit-transform 0.3s ease, -webkit-box-shadow 0.3s ease;
+  transition: transform 0.3s ease, box-shadow 0.3s ease, background 0.3s ease;
+  transition: transform 0.3s ease, box-shadow 0.3s ease, background 0.3s ease, -webkit-transform 0.3s ease, -webkit-box-shadow 0.3s ease;
+}
+
+.section4__item--products .product-cta:hover {
+  text-decoration: none;
+  background: #000000;
+  -webkit-transform: translateY(-1px);
+          transform: translateY(-1px);
+  -webkit-box-shadow: 0 14px 26px rgba(17, 17, 17, 0.22);
+          box-shadow: 0 14px 26px rgba(17, 17, 17, 0.22);
 }
 
 .footer {
@@ -706,9 +824,14 @@ body.scrolled header {
           transition-delay: 0.56s;
 }
 
-.js-enhanced.is-ready .section1 .background {
+.js-enhanced.is-ready .section1 .hero-slide.is-active {
   -webkit-animation: heroFloat 1.6s cubic-bezier(0.22, 1, 0.36, 1) both;
           animation: heroFloat 1.6s cubic-bezier(0.22, 1, 0.36, 1) both;
+}
+
+.js-enhanced .about-slide {
+  -webkit-animation: none;
+          animation: none;
 }
 
 .information:hover::before {
@@ -792,6 +915,60 @@ body.scrolled header {
   }
 }
 
+@-webkit-keyframes aboutCarousel {
+  0%,
+  20% {
+    -webkit-transform: translateX(0);
+            transform: translateX(0);
+  }
+  25%,
+  45% {
+    -webkit-transform: translateX(-25%);
+            transform: translateX(-25%);
+  }
+  50%,
+  70% {
+    -webkit-transform: translateX(-50%);
+            transform: translateX(-50%);
+  }
+  75%,
+  95% {
+    -webkit-transform: translateX(-75%);
+            transform: translateX(-75%);
+  }
+  100% {
+    -webkit-transform: translateX(0);
+            transform: translateX(0);
+  }
+}
+
+@keyframes aboutCarousel {
+  0%,
+  20% {
+    -webkit-transform: translateX(0);
+            transform: translateX(0);
+  }
+  25%,
+  45% {
+    -webkit-transform: translateX(-25%);
+            transform: translateX(-25%);
+  }
+  50%,
+  70% {
+    -webkit-transform: translateX(-50%);
+            transform: translateX(-50%);
+  }
+  75%,
+  95% {
+    -webkit-transform: translateX(-75%);
+            transform: translateX(-75%);
+  }
+  100% {
+    -webkit-transform: translateX(0);
+            transform: translateX(0);
+  }
+}
+
 @media (prefers-reduced-motion: reduce) {
   *, *::before, *::after {
     -webkit-animation: none !important;
@@ -807,6 +984,10 @@ body.scrolled header {
     opacity: 1 !important;
     -webkit-transform: none !important;
             transform: none !important;
+  }
+  .about-slider__track {
+    -webkit-animation: none !important;
+            animation: none !important;
   }
 }
 @media (max-width: 1024px) {
@@ -999,7 +1180,8 @@ body.scrolled header {
             justify-content: space-between;
   }
   .section1 .background,
-  .section2 .background {
+  .section2 > .background,
+  .section2 .about-slide {
     top: 0;
     height: 100%;
   }
@@ -1067,6 +1249,12 @@ body.scrolled header {
         -ms-flex-pack: center;
             justify-content: center;
   }
+  .section4__item--products .top__title {
+    padding: 24px 20px 0;
+  }
+  .section4__item--products .product-cta {
+    margin-top: 16px;
+  }
   .footer {
     padding: 0 20px 28px;
   }
@@ -1117,7 +1305,8 @@ body.scrolled header {
   .section1 .background {
     background-position: 60% center;
   }
-  .section2 .background {
+  .section2 > .background,
+  .section2 .about-slide {
     background-position: 58% center;
   }
   .section4__item {
