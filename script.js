@@ -1,5 +1,8 @@
 document.addEventListener("DOMContentLoaded", () => {
   const body = document.body;
+  const menuToggle = document.querySelector(".menu-toggle");
+  const headerNav = document.querySelector(".header-nav");
+  const navLinks = document.querySelectorAll(".header-nav a");
   const parallaxTargets = Array.from(document.querySelectorAll(".background"));
   const revealTargets = [
     ...document.querySelectorAll("section"),
@@ -8,6 +11,48 @@ document.addEventListener("DOMContentLoaded", () => {
   ];
 
   body.classList.add("js-enhanced");
+
+  const closeMenu = () => {
+    body.classList.remove("menu-open");
+    if (menuToggle) {
+      menuToggle.setAttribute("aria-expanded", "false");
+    }
+  };
+
+  const openMenu = () => {
+    body.classList.add("menu-open");
+    if (menuToggle) {
+      menuToggle.setAttribute("aria-expanded", "true");
+    }
+  };
+
+  if (menuToggle && headerNav) {
+    menuToggle.addEventListener("click", () => {
+      if (body.classList.contains("menu-open")) {
+        closeMenu();
+      } else {
+        openMenu();
+      }
+    });
+
+    navLinks.forEach((link) => {
+      link.addEventListener("click", () => {
+        closeMenu();
+      });
+    });
+
+    document.addEventListener("keydown", (event) => {
+      if (event.key === "Escape") {
+        closeMenu();
+      }
+    });
+
+    window.addEventListener("resize", () => {
+      if (window.innerWidth > 768) {
+        closeMenu();
+      }
+    });
+  }
 
   requestAnimationFrame(() => {
     body.classList.add("is-ready");
